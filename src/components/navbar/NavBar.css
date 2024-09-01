@@ -1,0 +1,10 @@
+.main{
+    height: 10%;
+    width: 100%;
+    background-color: white;
+    border-bottom: 2px solid #dcdcdc ;
+    /* text-align: center; */
+}
+h2{
+    margin-left: 20px;
+}

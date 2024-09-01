@@ -1,0 +1,112 @@
+[
+  {
+    "child": {
+      "name": "John",
+      "id": 0,
+      "image": "https://www.cloudways.com/wp-content/uploads/2022/10/ricky.png"
+    },
+    "parent": null,
+    "spouse": {
+      "name": "Isabella",
+      "id": 1,
+      "image": "https://teamworkassociatesinc.org/wp-content/uploads/2021/10/Panghoua.png"
+    }
+  },
+  {
+    "child": {
+      "name": "Kevin",
+      "id": 2,
+      "image": "https://themusclemedics.com/wp-content/uploads/2018/04/Circle-Profile-PNG.png"
+    },
+    "parent": 0,
+    "spouse": {
+      "name": "Emma",
+      "id": 3,
+      "image": "https://images.squarespace-cdn.com/content/v1/5d3b50b44d055000014b54aa/78e6ceb7-f7a4-4aa0-990d-7f41c06e51d8/Profile_Jantzen.png"
+    }
+  },
+  {
+    "child": {
+      "name": "Ann",
+      "id": 4,
+      "image": "https://www.oc-cf.org/wp-content/uploads/2022/05/JOANNA_KONG.png"
+    },
+    "parent": 0,
+    "spouse": {
+      "name": "George",
+      "id": 5,
+      "image": "https://mypulse.io/wp-content/themes/understrap-child-1.1.0/img/blog/Chirag_Shah.png"
+    }
+  },
+  {
+    "child": {
+      "name": "Aaron",
+      "id": 6,
+      "image": "https://www.levelequity.com/wp-content/uploads/sean-diljore-simpro-02.png"
+    },
+    "parent": 2,
+    "spouse": null
+  },
+  {
+    "child": {
+      "name": "Sarah",
+      "id": 7,
+      "image": "https://cdn.fs.teachablecdn.com/H8DRdN7RvSLmqi0uQlFX"
+    },
+    "parent": 2,
+    "spouse": {
+      "name": "James",
+      "id": 8,
+      "image": "https://th.bing.com/th/id/OIP.GVAAYhwvVdJJNfMU0Ct3xwHaHa?rs=1&pid=ImgDetMain"
+    }
+  },
+  {
+    "child": {
+      "name": "Mark",
+      "id": 9,
+      "image": "https://images.squarespace-cdn.com/content/v1/57f5390f5016e1da21c4bbdf/1484070931646-V1AU7TL484VM1UQTCH3Z/headshot_song_exploder.png"
+    },
+    "parent": 4,
+    "spouse": null
+  },
+  {
+    "child": {
+      "name": "Hannah",
+      "id": 10,
+      "image": "https://rigits.com/wp-content/uploads/2024/05/marifel_optimized.png"
+    },
+    "parent": 4,
+    "spouse": {
+      "name": "Williams",
+      "id": 11,
+      "image": "https://skydeck.berkeley.edu/wp-content/uploads/2024/04/Muaz-modified.png"
+    }
+  },
+  {
+    "child": {
+      "name": "Rose",
+      "id": 12,
+      "image": "https://th.bing.com/th/id/OIP.wUqCjCPHsKqI-R1svMn3IQAAAA?w=216&h=216&rs=1&pid=ImgDetMain"
+    },
+    "parent": 7,
+    "spouse": null
+  },
+  {
+    "child": {
+      "name": "Angel",
+      "id": 13,
+      "image": "https://www.nicepng.com/png/full/182-1829287_cammy-lin-ux-designer-circle-picture-profile-girl.png"
+    },
+    "parent": 7,
+    "spouse": null
+  },
+  {
+    "child": {
+      "name": "Tom",
+      "id": 14,
+      "image": "https://iabc.or.id/assets/uploads/1517759449214-modified.png"
+    },
+    "parent": 10,
+    "spouse": null
+  }
+]
