@@ -38,7 +38,7 @@ const FamilyTree = () => {
       .attr(
         "d",
         (d) => `
-        M${d.source.x - 10},${d.source.y} h 70 v 50 H ${d.target.x + 10} V${
+        M${d.source.x - 10},${d.source.y} h 70 v 50 H ${d.target.x-10} V${
           d.target.y
         }
       `
@@ -110,7 +110,7 @@ const FamilyTree = () => {
       .data(information.descendants().filter((d) => d.data.spouse !== null))
       .enter()
       .append("circle")
-      .attr("cx", (d) => d.x + 110)
+      .attr("cx", (d) => d.x + 130)
       .attr("cy", (d) => d.y - 20)
       .attr("r", 17)
       .attr("fill", "#f1f1f1");
@@ -134,7 +134,7 @@ const FamilyTree = () => {
       .enter()
       .append("image")
       .attr("xlink:href", (d) => `${d.data.spouse.image}`)
-      .attr("x", (d) => d.x + 95)
+      .attr("x", (d) => d.x + 115)
       .attr("y", (d) => d.y - 35)
       .attr("width", 30)
       .attr("height", 30);
