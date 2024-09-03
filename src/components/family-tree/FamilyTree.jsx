@@ -21,10 +21,8 @@ const FamilyTree = () => {
       .parentId((d) => d.parent)(data);
 
     // Adjust the size of the tree layout
-    const treeStructure = d3.tree().size([width - 50, height - 50]);
+    const treeStructure = d3.tree().size([width - 50, height - 270]);
     const information = treeStructure(dataStructure);
-
-    console.log("data", information);
 
     // Create a group element to contain the tree
     const g = svg.append("g");
@@ -38,16 +36,16 @@ const FamilyTree = () => {
       .attr(
         "d",
         (d) => `
-        M${d.source.x - 10},${d.source.y} h 70 v 50 H ${d.target.x-10} V${
-          d.target.y
-        }
+        M${d.source.parent === null ? d.source.x : d.source.x + 70},${
+          d.source.y + 60
+        } v 20 H ${d.target.x} V${d.target.y}
       `
       )
       .attr("fill", "none")
       .attr("stroke", "#dcdcdc")
-      .attr("stroke-width", 2);
+      .attr("stroke-width", 1);
 
-    // Draw connections2
+    // Draw connections for spouses
     g.append("g")
       .selectAll("path")
       .data(information.links())
@@ -56,12 +54,17 @@ const FamilyTree = () => {
       .attr(
         "d",
         (d) => `
-        M${d.source.x + 40},${d.source.y} h 40
+        M${d.source.parent === null ? d.source.x - 65 : d.source.x},${
+          d.source.y + 40
+        }
+        V${d.source.y + 60}
+        H${d.source.data.parent === null ? d.source.x + 70 : d.source.x + 140}
+        V${d.source.y}
       `
       )
       .attr("fill", "none")
       .attr("stroke", "#dcdcdc")
-      .attr("stroke-width", 2);
+      .attr("stroke-width", 1);
 
     // Draw nodes
     g.append("g")
@@ -69,12 +72,12 @@ const FamilyTree = () => {
       .data(information.descendants())
       .enter()
       .append("rect")
-      .attr("x", (d) => d.x - 60)
-      .attr("y", (d) => d.y - 20)
+      .attr("x", (d) => (d.data.parent === null ? d.x - 135 : d.x - 65))
+      .attr("y", (d) => d.y)
       .attr("stroke", "#f1f1f1")
       .attr("fill", "#f1f1f1")
-      .attr("width", "100px")
-      .attr("height", "40px")
+      .attr("width", 130)
+      .attr("height", 40)
       .attr("rx", 5)
       .attr("ry", 5);
 
@@ -84,12 +87,12 @@ const FamilyTree = () => {
       .data(information.descendants().filter((d) => d.data.spouse !== null))
       .enter()
       .append("rect")
-      .attr("x", (d) => d.x + 80)
-      .attr("y", (d) => d.y - 20)
+      .attr("x", (d) => (d.data.parent === null ? d.x + 5 : d.x + 75))
+      .attr("y", (d) => d.y)
       .attr("stroke", "#f1f1f1")
       .attr("fill", "#f1f1f1")
-      .attr("width", "100px")
-      .attr("height", "40px")
+      .attr("width", 130)
+      .attr("height", 40)
       .attr("rx", 5)
       .attr("ry", 5);
 
@@ -99,8 +102,8 @@ const FamilyTree = () => {
       .data(information.descendants())
       .enter()
       .append("circle")
-      .attr("cx", (d) => d.x - 10)
-      .attr("cy", (d) => d.y - 20)
+      .attr("cx", (d) => (d.data.parent === null ? d.x - 65 : d.x))
+      .attr("cy", (d) => d.y - 5)
       .attr("r", 17)
       .attr("fill", "#f1f1f1");
 
@@ -110,8 +113,8 @@ const FamilyTree = () => {
       .data(information.descendants().filter((d) => d.data.spouse !== null))
       .enter()
       .append("circle")
-      .attr("cx", (d) => d.x + 130)
-      .attr("cy", (d) => d.y - 20)
+      .attr("cx", (d) => (d.data.parent === null ? d.x + 70 : d.x + 140))
+      .attr("cy", (d) => d.y - 5)
       .attr("r", 17)
       .attr("fill", "#f1f1f1");
 
@@ -122,8 +125,8 @@ const FamilyTree = () => {
       .enter()
       .append("image")
       .attr("xlink:href", (d) => `${d.data.child.image}`)
-      .attr("x", (d) => d.x - 25)
-      .attr("y", (d) => d.y - 35)
+      .attr("x", (d) => (d.data.parent === null ? d.x - 80 : d.x - 15))
+      .attr("y", (d) => d.y - 20)
       .attr("width", 30)
       .attr("height", 30);
 
@@ -134,8 +137,8 @@ const FamilyTree = () => {
       .enter()
       .append("image")
       .attr("xlink:href", (d) => `${d.data.spouse.image}`)
-      .attr("x", (d) => d.x + 115)
-      .attr("y", (d) => d.y - 35)
+      .attr("x", (d) => (d.data.parent === null ? d.x + 55 : d.x + 125))
+      .attr("y", (d) => d.y - 20)
       .attr("width", 30)
       .attr("height", 30);
 
@@ -146,11 +149,12 @@ const FamilyTree = () => {
       .enter()
       .append("text")
       .text((d) => d.data.child.name)
-      .attr("x", (d) => d.x - 10)
-      .attr("y", (d) => d.y + 5)
+      .attr("x", (d) => (d.data.parent === null ? d.x - 65 : d.x))
+      .attr("y", (d) => d.y + 25)
       .attr("font-size", "12px")
       .attr("dominant-baseline", "middle")
-      .attr("text-anchor", "middle");
+      .attr("text-anchor", "middle")
+      .attr("fill", "#202123");
 
     // Add spouse labels
     g.append("g")
@@ -159,11 +163,64 @@ const FamilyTree = () => {
       .enter()
       .append("text")
       .text((d) => d.data.spouse.name)
-      .attr("x", (d) => d.x + 110)
-      .attr("y", (d) => d.y + 5)
+      .attr("x", (d) => (d.data.parent === null ? d.x + 70 : d.x + 140))
+      .attr("y", (d) => d.y + 25)
       .attr("font-size", "12px")
       .attr("dominant-baseline", "middle")
-      .attr("text-anchor", "middle");
+      .attr("text-anchor", "middle")
+      .attr("fill", "#202123");
+
+    // Add Options dots
+    g.append("g")
+      .selectAll("text")
+      .data(information.descendants())
+      .enter()
+      .append("text")
+      .text("...")
+      .attr("x", (d) => (d.data.parent === null ? d.x - 20 : d.x + 50))
+      .attr("y", (d) => d.y + 10)
+      .attr("font-size", "15px")
+      .attr("dominant-baseline", "middle")
+      .attr("text-anchor", "middle")
+      .attr("fill", "#737373");
+
+    // Add Options dots in spouse
+    g.append("g")
+      .selectAll("text")
+      .data(information.descendants().filter((d) => d.data.spouse !== null))
+      .enter()
+      .append("text")
+      .text("...")
+      .attr("x", (d) => (d.data.parent === null ? d.x + 120 : d.x + 190))
+      .attr("y", (d) => d.y + 10)
+      .attr("font-size", "15px")
+      .attr("dominant-baseline", "middle")
+      .attr("text-anchor", "middle")
+      .attr("fill", "#737373");
+
+    //  Added yellow circle in main parent
+    g.append("g")
+      .selectAll("circle")
+      .data(information.descendants().filter((d) => d.data.child.id === 0)) // Filter data directly here
+      .enter()
+      .append("circle")
+      .attr("cx", (d) => d.x - 53)
+      .attr("cy", (d) => d.y + 10)
+      .attr("r", 8)
+      .attr("fill", "#d5b04d");
+
+    //  Added heart shape in main parent
+    g.append("g")
+      .selectAll("text")
+      .data(information.descendants().filter((d) => d.data.child.id === 0))
+      .enter()
+      .append("text")
+      .attr("x", (d) => d.x - 53)
+      .attr("y", (d) => d.y + 14)
+      .attr("font-size", "11px")
+      .attr("text-anchor", "middle")
+      .attr("fill", "black")
+      .text("🖤");
 
     // Center the tree
     const bounds = svg.node().getBBox();
